@@ -1,0 +1,54 @@
+Registro de compras y ventas de la tienda del vecino.
+Tiene productos de aseo y comida.
+
+ENTENDER QUE SE REQUIERE = "REQUERIMIENTOS FUNCIONALES"
+Que artículos vende?
+Presentación del producto?
+En dónde los compra?
+Valor compra?
+Precio venta de cada artículo?
+Cómo lleva las cuentas?
+Tiene inventario?
+Que información quiere manejar?
+
+ENTENDER EL ALCANCE DEL PROYECTO
+
+=================================================================
+			PROYECTO
+
+Formas de conceptualizar/enfocar el desarrollo del proyecto:
+-Desde los requisitos del sistema
+|| uno u otro
+-Desde los requerimientos del usuario
+
+REQUISITOS DEL SISTEMA
+
+Manejo de productos
+-Agregar: agregar nuevo producto
+-Remover: eliminar producto existente
+-Modificar: características del producto => cantidad y precio
+-Inventario: modificar y verificar cantidad disponible
+----------
+Tipo: Aseo, Alimentos
+Nombre: Descripción del producto
+Marca: Marca
+Presentación: Descripción de la presentación
+Cantidad: Cantidad unitaria
+Precio: valor de venta
+Código(id): identificación de cada producto
+
+REQUERIMIENTOS DEL USUARIO
+
+Manejo de productos
+-Agregar
+-Remover
+-Modificar
+-Inventario
+----------
+Tipo: Aseo, Alimentos
+Cantidad: Cantidad unitaria
+Nombre: Descripción del producto
+Marca: Marca
+Precio: valor de venta
+Presentación: Descripción de la presentación
+Código(id): identificación de cada producto
