@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.nio.charset.Charset;
 
 public class ArchivoProductos
 {
@@ -14,11 +15,44 @@ public class ArchivoProductos
         this.archivo = new File("productos.csv");
     }
     
-    public void guardarProducto(String texto)
+    public void guardarProducto(String texto) //guardamos un producto al final del archivo .CSV
+    {
+        /*try
+        {
+            FileWriter writer = new FileWriter(this.archivo, true); // true, para añadir el contenido al final del .CSV
+            PrintWriter cursor = new PrintWriter(writer);
+            cursor.println(texto);
+            cursor.flush();
+            cursor.close();
+            writer.close();
+        }
+        catch(Exception e)
+        {
+            
+        }*/
+        
+        this.guardar(texto, true); //true, para añadir un producto al final del .CSV
+    }
+    
+    public void actualizarLista(ArrayList<Producto> lista) //para guardar toda la lista actualizada en el .CSV
+    {
+        String texto = "";
+        for (int i = 0; i<lista.size(); i++)//(Producto p: lista) lo cambiamos para evitar que agregue un espacio innecesario en .CSV
+        {
+            if (i!=0)
+            {
+                texto = texto + "\n";
+            }
+            texto = texto + lista.get(i).toCSV();
+        }
+        this.guardar(texto, false); //false, para reemplazar todo el contenido en .CSV por el nuevo al ejecutar guardarLista()
+    }
+    
+    private void guardar(String texto, boolean agregar) //boolean entre guardarProducto() y actualizarLista(...)
     {
         try
         {
-            FileWriter writer = new FileWriter(this.archivo, true);
+            FileWriter writer = new FileWriter(this.archivo, Charset.forName("UTF-8") , agregar); //charset para usar un set de caracteres especial
             PrintWriter cursor = new PrintWriter(writer);
             cursor.println(texto);
             cursor.flush();

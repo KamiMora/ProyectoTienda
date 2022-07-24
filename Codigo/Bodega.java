@@ -48,9 +48,11 @@ public class Bodega
         Producto prodAument = this.getProducto(id);
         if (prodAument != null)
         {
-            int index = this.listaProductos.indexOf(prodAument);
+            int index = this.listaProductos.indexOf(prodAument); //busca el indice del producto
             this.listaProductos.get(index).setCantidad(prodAument.getCantidad() + cant);
         }
+        ArchivoProductos a = new ArchivoProductos();
+        a.actualizarLista(this.listaProductos);
     }
 
     public void reducirProducto(int id, int cant) 
