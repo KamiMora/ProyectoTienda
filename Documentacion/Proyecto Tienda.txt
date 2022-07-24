@@ -29,7 +29,7 @@ Manejo de productos
 -Aumentar: surtir bodega
 -Reducir: sacar de bodega
 -Modificar: características del producto => precio
--Inventario: modificar y verificar cantidad disponible
+-Inventario: consultar productos en bodega(tipo, nombre, marca, código(id))
 ----------
 Tipo: Aseo, Alimentos
 Nombre: Descripción del producto
@@ -39,64 +39,7 @@ Cantidad: Cantidad unitaria
 Precio: valor de venta
 Código(id): identificación de cada producto(secuencial, aleatorio, código directo)
 
+*Grooming: proceso por el cual refinamos los requerimientos/requisitos para desarrollar mejor el proyecto.
 
 
-    public void eliminarProducto()
-    {
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese código del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE)); //(estructura se encuentra en el API)
-        String tipo = (JOptionPane.showInputDialog(null, "Ingrese tipo del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        String nombre = (JOptionPane.showInputDialog(null, "Ingrese nombre del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        String marca = (JOptionPane.showInputDialog(null, "Ingrese marca del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        String presentacion = (JOptionPane.showInputDialog(null, "Ingrese presentación del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese cantidad del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        int precio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese precio del producto", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE));
-        
-        Producto p = new Producto(id, tipo, nombre, marca, presentacion, cantidad, precio);
-        this.bodega.eliminarProducto(p);
-        JOptionPane.showMessageDialog(null, "Producto eliminado de la bodega", "Producto eliminado", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    public void aumentarProducto()
-    {
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese código del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE)); //(estructura se encuentra en el API)
-        String tipo = (JOptionPane.showInputDialog(null, "Ingrese tipo del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String nombre = (JOptionPane.showInputDialog(null, "Ingrese nombre del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String marca = (JOptionPane.showInputDialog(null, "Ingrese marca del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String presentacion = (JOptionPane.showInputDialog(null, "Ingrese presentación del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese cantidad del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int precio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese precio del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        
-        Producto p = new Producto(id, tipo, nombre, marca, presentacion, cantidad, precio);
-        this.bodega.aumentarProducto(p);
-        JOptionPane.showMessageDialog(null, "Producto creado y añadido a la bodega", "Producto creado", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    public void aumentarProducto()
-    {
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese código del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE)); //(estructura se encuentra en el API)
-        String tipo = (JOptionPane.showInputDialog(null, "Ingrese tipo del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String nombre = (JOptionPane.showInputDialog(null, "Ingrese nombre del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String marca = (JOptionPane.showInputDialog(null, "Ingrese marca del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String presentacion = (JOptionPane.showInputDialog(null, "Ingrese presentación del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese cantidad del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int precio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese precio del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        
-        Producto p = new Producto(id, tipo, nombre, marca, presentacion, cantidad, precio);
-        this.bodega.aumentarProducto(p);
-        JOptionPane.showMessageDialog(null, "Producto creado y añadido a la bodega", "Producto creado", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    public void modificarPrecio()
-    {
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese código del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE)); //(estructura se encuentra en el API)
-        String tipo = (JOptionPane.showInputDialog(null, "Ingrese tipo del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String nombre = (JOptionPane.showInputDialog(null, "Ingrese nombre del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String marca = (JOptionPane.showInputDialog(null, "Ingrese marca del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        String presentacion = (JOptionPane.showInputDialog(null, "Ingrese presentación del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese cantidad del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        int precio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese precio del producto", "Nuevo producto", JOptionPane.INFORMATION_MESSAGE));
-        
-        Producto p = new Producto(id, tipo, nombre, marca, presentacion, cantidad, precio);
-        this.bodega.modificarPrecio(p);
-        JOptionPane.showMessageDialog(null, "Producto creado y añadido a la bodega", "Producto creado", JOptionPane.INFORMATION_MESSAGE);
-    }
+  

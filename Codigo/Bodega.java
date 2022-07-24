@@ -6,7 +6,8 @@ public class Bodega
 
     public Bodega() 
     {
-        this.listaProductos = new ArrayList<Producto>();
+        ArchivoProductos a = new ArchivoProductos();
+        this.listaProductos = a.cargarProductos(); //ya no necesitamos new ArrayList<Producto>
     }
     
     public ArrayList<Producto> getListaProductos() //creamos un array para que reciba listaProductos
@@ -17,6 +18,8 @@ public class Bodega
     public void agregarProducto(Producto p) 
     {
         this.listaProductos.add(p);
+        ArchivoProductos a = new ArchivoProductos();
+        a.guardarProducto(p.toCSV());
     }
 
     public Producto getProducto(int id) 
@@ -72,7 +75,19 @@ public class Bodega
             this.listaProductos.get(index).setPrecio(precio);
         }
     }
-
+    
+    public ArrayList<Producto> buscarProductos(String criterio)
+    {
+        ArrayList<Producto> productosEncontrados = new ArrayList<Producto>();
+        for (Producto p: this.listaProductos)
+        {
+            if ((p.getId()+"").equals(criterio) || p.getTipo().equals(criterio) || p.getNombre().equals(criterio) || p.getMarca().equals(criterio) || p.getPresentacion().equals(criterio))            
+            {   //id es int y para convertirlo fácil a texto se concatena con un ""texto vacío
+                productosEncontrados.add(p);
+            }
+        }
+        return productosEncontrados;
+    }
 }
 
 /** 
@@ -84,5 +99,6 @@ public class Bodega
 
 /** java api => encontramos las librerías y métodos */
 
-
-
+/** Persistencia
+ * 
+ */

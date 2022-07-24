@@ -16,4 +16,6 @@ comment7.params=id\ cant
 comment7.target=void\ reducirProducto(int,\ int)
 comment8.params=id\ precio
 comment8.target=void\ modificarPrecio(int,\ int)
-numComments=9
+comment9.params=criterio
+comment9.target=java.util.ArrayList\ buscarProductos(java.lang.String)
+numComments=10
