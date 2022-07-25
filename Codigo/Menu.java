@@ -216,14 +216,28 @@ public class Menu
              * DML = Data Manipulation Language => manipulación de datos
              
      * Visor de BDD = permite visualizar claramente la información en la BDD(no se hace en Java)
-     * Driver = proporciona la conexión entre el código y el motor
+     * Driver = proporciona la conexión entre el código y el motor. Se debe instalar
+         * se necesita una clase con un elemento que genere la conexión con BDD
+                                     un elemento que genere las sentencias
  * 
- * Funciones/elementos del software                SQL
-
- * C reation                             Insert
- * R etrieve                             Select
- * U pdate                               Update
- * D elete                               Delete
+ * SQL = https://www.w3schools.com/sql/default.asp
+ * 
+     * Funciones/elementos del software               SQL sentences
+    
+     * C reation                                    Insert
+     * R etrieve                                    Select
+     * U pdate                                      Update
+     * D elete                                      Delete
+     * 
+     * Convención:
+         * para nombrar las tablas se puede usar el nombre de la clase con una "T" al comienzo
+         * para nombrar las columnas se puede usar el nombre de los atributos
+         * para números, sin importar el tipo de dato, se usa NUMERIC de manera genérica
+         * para texto, sin importar su tipo, se usa VARCHAR
+         * Primary Key = caracteristica única como un código(id)
+         * Not NULL = no puede faltar este dato
+         * 
+ * 
  * 
  * 
  * 
