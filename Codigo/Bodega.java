@@ -6,48 +6,48 @@ public class Bodega
 
     public Bodega() 
     {
-        ArchivoProductos a = new ArchivoProductos();
-        this.listaProductos = a.cargarProductos(); //ya no necesitamos new ArrayList<Producto>
+        /*ArchivoProductos a = new ArchivoProductos();*/
+        this.listaProductos = new ArrayList<Producto>(); //ya no necesitamos new ArrayList<Producto>
     }
     
     public ArrayList<Producto> getListaProductos() //creamos un array para que reciba listaProductos
     {
-        ArchivoProductos a = new ArchivoProductos();
-        this.listaProductos = a.cargarProductos();
+        //ArchivoProductos a = new ArchivoProductos();
+        //this.listaProductos = a.cargarProductos();
         return this.listaProductos;
     }
 
     public void agregarProducto(Producto p) 
     {
-        this.listaProductos.add(p);
+        /*this.listaProductos.add(p);
         ArchivoProductos a = new ArchivoProductos();
-        a.guardarProducto(p.toCSV());
+        a.guardarProducto(p.toCSV());*/
     }
 
     public Producto getProducto(int id) 
     {
-        for (Producto p: this.listaProductos)
+        /*for (Producto p: this.listaProductos)
         {
             if (p.getId() == id)
             {
                 return p;
             }
-        }
+        }*/
         return null;
     }
     
     public void eliminarProducto(int id) 
     {
-        Producto prodEliminar = this.getProducto(id);
+        /*Producto prodEliminar = this.getProducto(id);
         if (prodEliminar != null)
         {
             this.listaProductos.remove(prodEliminar);
-        }
+        }*/
     }
 
     public void aumentarProducto(int id, int cant) 
     {
-        Producto prodAument = this.getProducto(id);
+        /*Producto prodAument = this.getProducto(id);
         if (prodAument != null)
         {
             int index = this.listaProductos.indexOf(prodAument); //busca el indice del producto
@@ -55,12 +55,12 @@ public class Bodega
         }
         /*ArchivoProductos a = new ArchivoProductos();
         a.actualizarLista(this.listaProductos);*/ //los envíamos a actualizarListaEnArchivo
-        this.actualizarListaEnArchivo(); // llamamos el método para que actualice listaProductos
+        /*this.actualizarListaEnArchivo();  //llamamos el método para que actualice listaProductos*/
     }
 
     public void reducirProducto(int id, int cant) // venta
     {
-        Producto prodDisminuir = this.getProducto(id);
+        /*Producto prodDisminuir = this.getProducto(id);
         //System.out.println("En bodega " + prodDisminuir.mostrarInfo());
         if (prodDisminuir != null)
         {
@@ -70,28 +70,28 @@ public class Bodega
                 this.listaProductos.get(index).setCantidad(prodDisminuir.getCantidad() - cant);
                 //System.out.println("Retirado de bodega " + this.listaProductos.get(index).mostrarInfo());
             }
-        }
+        }*/
     }
     
     public void actualizarListaEnArchivo()
     {
-        ArchivoProductos a = new ArchivoProductos();
-        a.actualizarLista(this.listaProductos);
+        /*ArchivoProductos a = new ArchivoProductos();
+        a.actualizarLista(this.listaProductos);*/
     }
 
     public void modificarPrecio(int id, int precio) 
     {
-        Producto prodModif = this.getProducto(id);
+        /*Producto prodModif = this.getProducto(id);
         if (prodModif != null)
         {
             int index = this.listaProductos.indexOf(prodModif);
             this.listaProductos.get(index).setPrecio(precio);
-        }
+        }*/
     }
     
     public ArrayList<Producto> buscarProductos(String criterio)
     {
-        ArrayList<Producto> productosEncontrados = new ArrayList<Producto>();
+        /*ArrayList<Producto> productosEncontrados = new ArrayList<Producto>();
         for (Producto p: this.listaProductos)
         {
             if ((p.getId()+"").equals(criterio) || p.getTipo().equals(criterio) || p.getNombre().equals(criterio) || p.getMarca().equals(criterio) || p.getPresentacion().equals(criterio))            
@@ -99,7 +99,8 @@ public class Bodega
                 productosEncontrados.add(p);
             }
         }
-        return productosEncontrados;
+        return productosEncontrados;*/
+        return null;
     }
 }
 
