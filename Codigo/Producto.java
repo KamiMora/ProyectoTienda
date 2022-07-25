@@ -1,27 +1,30 @@
 public class Producto 
 {
     private int id;
+    private int codigobarras;
     private String tipo;
     private String nombre;
     private String marca;
     private String presentacion;
-    private int precio;
     private int cantidad;
-    
-    public void Producto() 
+    private int precio;
+
+    public Producto() 
     {
         this.id = 0;
+        this.codigobarras = 0;
         this.tipo = "";
         this.nombre = "";
         this.marca = "";
         this.presentacion = "";
-        this.precio = 0;
         this.cantidad = 0;
+        this.precio = 0;
     }
 
-    public Producto(int id, String tipo, String nombre, String marca, String presentacion, int cantidad, int precio) 
+    public Producto(int id, int codigobarras, String tipo, String nombre, String marca, String presentacion, int cantidad, int precio) 
     {
         this.id = id;
+        this.codigobarras = codigobarras;
         this.tipo = tipo;
         this.nombre = nombre;
         this.marca = marca;
@@ -29,8 +32,18 @@ public class Producto
         this.cantidad = cantidad;
         this.precio = precio;
     }
+    
+    public void setCodigoBarras(int codigobarras) 
+    {
+        this.codigobarras = codigobarras;
+    }
 
-        public void setCantidad(int cantidad) 
+    public int getCodigoBarras() 
+    {
+        return this.codigobarras;
+    }
+
+    public void setCantidad(int cantidad) 
     {
         this.cantidad = cantidad;
     }
@@ -77,7 +90,7 @@ public class Producto
 
     public String toString()
     {
-        return "Cod:" +this.id+ "\nProducto: "+this.nombre +" "+ this.marca + "\nPresentación; " +this.presentacion + "\nPrecio: "+this.precio + "\nStock: "+this.cantidad;
+        return "Cod:" +this.codigobarras+ " - Producto: "+this.nombre +" "+ this.marca + " - " +this.presentacion+" Precio: "+this.precio+" Stock: "+this.cantidad;
     }
     
     public String mostrarInfo()
@@ -90,6 +103,24 @@ public class Producto
         return this.id+ ";" +this.tipo+";"+this.nombre +";"+ this.marca + ";" +this.presentacion+";"+this.precio+";"+this.cantidad;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /** ALMACENAR INFORMACIÓN

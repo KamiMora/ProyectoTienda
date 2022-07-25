@@ -1,17 +1,13 @@
-public class Inicio 
-{
+public class Inicio {
+
     public static void main(String [] args) 
     {
-        Menu m = new Menu(); //** creo un objeto de tipo Menu para que presente el menuPrincipal
-        m.presentarMenuPrincipal(); 
+        Presentacion p = new Presentacion();
+        p.presentarMenuPrincipal();
         
-        /* Esto lo utilizamos para hacer la prueba de como se guardan los datos en el archivo "productos.csv"
-        ArchivoProductos a = new ArchivoProductos();
-        a.guardarArchivo("Ejemplo de datos guardados");
-        Sytem.out.println("Archivo guardado");
-         */
+        //Pantalla p = new Pantalla();
     }
-        
+
 }
 
 /**Pruebas unitarias

@@ -5,24 +5,24 @@ import java.sql.ResultSet;
 
 public class Conexion
 {
-    private String conectorInstalado = "jdbc:sqlite:"; //el driver a usar. revisar documentación del driver
-    private String baseDatos = "..\\Basedatos\\ProyectoTienda.db"; //(".." = carpeta está un nivel fuera del proyecto)(\\ = buscar una carpeta)(Basedatos = nombre carpeta)(ProyectoTienda.db = nombre archivo)
+    private String conectorInstalado = "jdbc:sqlite:";
+    private String baseDatos = "..\\Basedatos\\basedatos.db";
     private Connection conexion;  //CONEXION CON LA BD
     private Statement ejecutorSQL;   //SENTENCIAS SQL
-    private ResultSet rs; //ResultSet es un query que funciona como el ArrayList en SQL
+    private ResultSet rs;
     
     public boolean crearConexion()
     {
         try
         {
-            conexion = DriverManager.getConnection(conectorInstalado + baseDatos); //crea una conexión
+            conexion = DriverManager.getConnection(conectorInstalado + baseDatos);
             ejecutorSQL = conexion.createStatement();
-            ejecutorSQL.setQueryTimeout(30); //setQueryTimeout(30): espere 30 seg por una respuesta antes de generar error
-            return true; // para que verifique que la conexión se creó
+            ejecutorSQL.setQueryTimeout(30);
+            return true;
         }
         catch(Exception e)
         {
-            return false; // cuando la conexión no se crea
+            return false;
         }
     }
     
@@ -30,7 +30,7 @@ public class Conexion
     {
         try
         {
-            conexion.close(); //cierra una conexión
+            conexion.close();
             return true;
         }
         catch (Exception e)
@@ -44,50 +44,65 @@ public class Conexion
         try
         {
             int cant = ejecutorSQL.executeUpdate(sql);
-            if (cant > 0) 
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+    
+    public boolean actualizar(String sql)
+    {
+        try
+        {
+            int cant = ejecutorSQL.executeUpdate(sql);
+            if (cant > 0)
             {
-                rs = ejecutorSQL.getGeneratedKeys(); //pone en "rs" las llaves que encontró el query
+                return true;
+            }
+            else 
+            {
+                return false;
             }
         }
         catch (Exception e)
         {
-            
+            return false;
         }
     }
     
-    public void actualizar(String sql)
-    {
-        try
-        {
-            int cant = ejecutorSQL.executeUpdate(sql);
-        }
-        catch (Exception e)
-        {
-            
-        }
-    }
-    
-    public void consultar(String sql)
+    public ResultSet consultar(String sql)
     {
         try
         {
             rs = ejecutorSQL.executeQuery(sql);
+            return rs;
         }
         catch (Exception e)
         {
-            
+            return null;
         }
     }
     
-    public void borrar(String sql)
+    public boolean borrar(String sql)
     {
         try
         {
             int cant = ejecutorSQL.executeUpdate(sql);
+            if (cant > 0)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
         catch (Exception e)
         {
-            
+            return false;
         }
     }
-}    
+    
+    
+}

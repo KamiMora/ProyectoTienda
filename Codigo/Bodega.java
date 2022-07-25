@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.sql.ResultSet;
 
 public class Bodega 
 {
@@ -6,103 +7,159 @@ public class Bodega
 
     public Bodega() 
     {
-        /*ArchivoProductos a = new ArchivoProductos();*/
-        this.listaProductos = new ArrayList<Producto>(); //ya no necesitamos new ArrayList<Producto>
+        this.listaProductos = new ArrayList<Producto>();
     }
     
-    public ArrayList<Producto> getListaProductos() //creamos un array para que reciba listaProductos
+    public ArrayList<Producto> getListaProductos()
     {
-        //ArchivoProductos a = new ArchivoProductos();
-        //this.listaProductos = a.cargarProductos();
+        this.listaProductos.clear();
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "SELECT id, codigobarras, tipo, nombre, marca, presentacion, precio, cantidad "+
+                     "FROM TProductos ";
+        ResultSet rs = con.consultar(sql);
+        try
+        {
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+                int codigobarras = rs.getInt(2);
+                String tipo = rs.getString(3);
+                String nombre = rs.getString(4);
+                String marca = rs.getString(5);
+                String presentacion = rs.getString(6);
+                int precio = rs.getInt(7);
+                int cantidad = rs.getInt(8);
+                Producto p = new Producto(id, codigobarras, tipo, nombre, marca, presentacion, cantidad, precio);
+                this.listaProductos.add(p);
+            } 
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+        con.cerrarConexion();
         return this.listaProductos;
     }
 
-    public void agregarProducto(Producto p) 
+    public void anadirProducto(Producto p) 
     {
-        /*this.listaProductos.add(p);
-        ArchivoProductos a = new ArchivoProductos();
-        a.guardarProducto(p.toCSV());*/
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "INSERT INTO TProductos(codigobarras, tipo, nombre, marca, presentacion, precio, cantidad) "+
+                     "VALUES ("+p.getCodigoBarras()+", \""+p.getTipo()+"\",  \""+p.getNombre()+"\",  \""+p.getMarca()+"\", \""+p.getPresentacion()+"\", "+p.getPrecio()+", "+p.getCantidad()+")" ;
+        con.insertar(sql);                 
+        //OPERACIONES
+        con.cerrarConexion();
     }
 
-    public Producto getProducto(int id) 
+    public Producto getProducto(int codigo) 
     {
-        /*for (Producto p: this.listaProductos)
+        Producto p = null;
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "SELECT id, codigobarras, tipo, nombre, marca, presentacion, precio, cantidad "+
+                     "FROM TProductos "+
+                     "WHERE codigobarras = " + codigo;
+        ResultSet rs = con.consultar(sql);
+        try
         {
-            if (p.getId() == id)
+            while(rs.next())
             {
-                return p;
-            }
-        }*/
-        return null;
-    }
-    
-    public void eliminarProducto(int id) 
-    {
-        /*Producto prodEliminar = this.getProducto(id);
-        if (prodEliminar != null)
-        {
-            this.listaProductos.remove(prodEliminar);
-        }*/
-    }
-
-    public void aumentarProducto(int id, int cant) 
-    {
-        /*Producto prodAument = this.getProducto(id);
-        if (prodAument != null)
-        {
-            int index = this.listaProductos.indexOf(prodAument); //busca el indice del producto
-            this.listaProductos.get(index).setCantidad(prodAument.getCantidad() + cant);
+                int id = rs.getInt(1);
+                int codigobarras = rs.getInt(2);
+                String tipo = rs.getString(3);
+                String nombre = rs.getString(4);
+                String marca = rs.getString(5);
+                String presentacion = rs.getString(6);
+                int precio = rs.getInt(7);
+                int cantidad = rs.getInt(8);
+                p = new Producto(id, codigobarras, tipo, nombre, marca, presentacion, cantidad, precio);
+            } 
         }
-        /*ArchivoProductos a = new ArchivoProductos();
-        a.actualizarLista(this.listaProductos);*/ //los envíamos a actualizarListaEnArchivo
-        /*this.actualizarListaEnArchivo();  //llamamos el método para que actualice listaProductos*/
-    }
-
-    public void reducirProducto(int id, int cant) // venta
-    {
-        /*Producto prodDisminuir = this.getProducto(id);
-        //System.out.println("En bodega " + prodDisminuir.mostrarInfo());
-        if (prodDisminuir != null)
+        catch(Exception e)
         {
-            int index = this.listaProductos.indexOf(prodDisminuir);
-            if (prodDisminuir.getCantidad() >= cant)
-            {
-                this.listaProductos.get(index).setCantidad(prodDisminuir.getCantidad() - cant);
-                //System.out.println("Retirado de bodega " + this.listaProductos.get(index).mostrarInfo());
-            }
-        }*/
-    }
-    
-    public void actualizarListaEnArchivo()
-    {
-        /*ArchivoProductos a = new ArchivoProductos();
-        a.actualizarLista(this.listaProductos);*/
-    }
-
-    public void modificarPrecio(int id, int precio) 
-    {
-        /*Producto prodModif = this.getProducto(id);
-        if (prodModif != null)
-        {
-            int index = this.listaProductos.indexOf(prodModif);
-            this.listaProductos.get(index).setPrecio(precio);
-        }*/
+            return null;
+        }
+        con.cerrarConexion();
+        return p;
     }
     
     public ArrayList<Producto> buscarProductos(String criterio)
     {
-        /*ArrayList<Producto> productosEncontrados = new ArrayList<Producto>();
-        for (Producto p: this.listaProductos)
+        this.listaProductos.clear();
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "SELECT id, codigobarras, tipo, nombre, marca, presentacion, precio, cantidad "+
+                     "FROM TProductos " +
+                     "WHERE tipo LIKE \"%"+criterio+"%\" " + 
+                     "OR nombre LIKE \"%"+criterio+"%\" " + 
+                     "OR presentacion LIKE \"%"+criterio+"%\" " + 
+                     "OR marca LIKE \"%"+criterio+"%\" ";
+        ResultSet rs = con.consultar(sql);
+        try
         {
-            if ((p.getId()+"").equals(criterio) || p.getTipo().equals(criterio) || p.getNombre().equals(criterio) || p.getMarca().equals(criterio) || p.getPresentacion().equals(criterio))            
-            {   //id es int y para convertirlo fácil a texto se concatena con un ""texto vacío
-                productosEncontrados.add(p);
-            }
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+                int codigobarras = rs.getInt(2);
+                String tipo = rs.getString(3);
+                String nombre = rs.getString(4);
+                String marca = rs.getString(5);
+                String presentacion = rs.getString(6);
+                int precio = rs.getInt(7);
+                int cantidad = rs.getInt(8);
+                Producto p = new Producto(id, codigobarras, tipo, nombre, marca, presentacion, cantidad, precio);
+                this.listaProductos.add(p);
+            } 
         }
-        return productosEncontrados;*/
-        return null;
+        catch(Exception e)
+        {
+            return null;
+        }
+        con.cerrarConexion();
+        return this.listaProductos;
     }
+    
+    public void eliminarProducto(int codigo)
+    {
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "DELETE FROM TProductos "+
+                     "WHERE codigobarras = "+codigo;
+        con.borrar(sql);
+        con.cerrarConexion();
+    }
+
+    public void incrementarProducto(int codigo, int cant, int precio) 
+    {
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "UPDATE TProductos "+
+                     "SET cantidad = cantidad + "+ cant +", precio = "+ precio +" "+
+                     "WHERE codigobarras = "+codigo;
+        con.actualizar(sql);
+        con.cerrarConexion();
+    }
+
+    public void disminuirProducto(int codigo, int cant) 
+    {
+        Conexion con = new Conexion();
+        con.crearConexion();
+        String sql = "UPDATE TProductos "+
+                     "SET cantidad = cantidad - "+ cant +" "+
+                     "WHERE codigobarras = "+codigo;
+        con.actualizar(sql);
+        con.cerrarConexion();
+    }
+    
 }
+
+
+
+
+
+
 
 /** 
  * Bodega es la Clase contenedora
