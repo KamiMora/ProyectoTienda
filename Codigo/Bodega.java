@@ -12,6 +12,8 @@ public class Bodega
     
     public ArrayList<Producto> getListaProductos() //creamos un array para que reciba listaProductos
     {
+        ArchivoProductos a = new ArchivoProductos();
+        this.listaProductos = a.cargarProductos();
         return this.listaProductos;
     }
 
@@ -51,21 +53,30 @@ public class Bodega
             int index = this.listaProductos.indexOf(prodAument); //busca el indice del producto
             this.listaProductos.get(index).setCantidad(prodAument.getCantidad() + cant);
         }
-        ArchivoProductos a = new ArchivoProductos();
-        a.actualizarLista(this.listaProductos);
+        /*ArchivoProductos a = new ArchivoProductos();
+        a.actualizarLista(this.listaProductos);*/ //los envíamos a actualizarListaEnArchivo
+        this.actualizarListaEnArchivo(); // llamamos el método para que actualice listaProductos
     }
 
-    public void reducirProducto(int id, int cant) 
+    public void reducirProducto(int id, int cant) // venta
     {
         Producto prodDisminuir = this.getProducto(id);
+        //System.out.println("En bodega " + prodDisminuir.mostrarInfo());
         if (prodDisminuir != null)
         {
             int index = this.listaProductos.indexOf(prodDisminuir);
             if (prodDisminuir.getCantidad() >= cant)
             {
                 this.listaProductos.get(index).setCantidad(prodDisminuir.getCantidad() - cant);
+                //System.out.println("Retirado de bodega " + this.listaProductos.get(index).mostrarInfo());
             }
         }
+    }
+    
+    public void actualizarListaEnArchivo()
+    {
+        ArchivoProductos a = new ArchivoProductos();
+        a.actualizarLista(this.listaProductos);
     }
 
     public void modificarPrecio(int id, int precio) 

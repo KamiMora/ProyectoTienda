@@ -46,7 +46,7 @@ public class Menu
                     this.presentarMenuProductos();
                     break;
                 case 1:
-                    
+                    this.realizarVenta();
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Hasta luego, Veci!", "Salir", JOptionPane.INFORMATION_MESSAGE); //(estructura se encuentra en el API)
@@ -115,7 +115,7 @@ public class Menu
         JOptionPane.showMessageDialog(null, datosProductos, "Productos en bodega", JOptionPane.INFORMATION_MESSAGE);        
     }
     
-    public void buscarProductos()
+    public boolean buscarProductos()
     {
         String buscar = (JOptionPane.showInputDialog(null, "Ingrese código o nombre o tipo o presentación del producto a buscar", "Buscar producto", JOptionPane.INFORMATION_MESSAGE));
         ArrayList<Producto> lista = this.bodega.buscarProductos(buscar); //el ArrayList lista contiene los productos encontrados en bodega
@@ -128,10 +128,12 @@ public class Menu
         if (datosProductos.equals(""))
         {
             JOptionPane.showMessageDialog(null, "No se encontraron productos", "Productos no encontrados", JOptionPane.WARNING_MESSAGE);
+            return false;
         } 
         else
         {
-        JOptionPane.showMessageDialog(null, datosProductos, "Productos encontrados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, datosProductos, "Productos encontrados", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         }
     }
     
@@ -144,10 +146,86 @@ public class Menu
         Producto p = this.bodega.getProducto(codigo);    
         JOptionPane.showMessageDialog(null, p.mostrarInfo(), "Producto surtido", JOptionPane.INFORMATION_MESSAGE); //muestra la info del producto surtido
     }
+    
+    public void realizarVenta()
+    {
+        Venta v = new Venta(); //variable Venta para guardar producto p y cantidad
+        boolean continuarVenta = false;
+        do
+        {
+            boolean encontrado = this.buscarProductos(); //buscar si hay producto disponible en bodega y devolver id producto para poder aumentar su cantidad
+            if (encontrado)
+            {
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el código del producto a comprar", "Compra", JOptionPane.INFORMATION_MESSAGE));
+                Producto p = this.bodega.getProducto(codigo);
+                //System.out.println("En bodega " + p.mostrarInfo());
+                int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad a comprar", "Compra", JOptionPane.INFORMATION_MESSAGE));
+                v.agregarProductoAlCarrito(p, cantidad);
+                JOptionPane.showMessageDialog(null, p.mostrarInfo(), "Producto agregado al carrito", JOptionPane.INFORMATION_MESSAGE);
+                int confirmacion = JOptionPane.showConfirmDialog(null, "Desea gregar más productos?", "Finalizar compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                continuarVenta = (confirmacion == JOptionPane.YES_OPTION) ? true : false; //operador ternario para continuar venta dependiendo de la confirmación
+            }
+            else
+            {
+                continuarVenta = true;
+            }
+        }
+        while(continuarVenta);
+        int total = v.calcularTotalVenta();
+        int confirmarVenta = JOptionPane.showConfirmDialog(null, "El total a pagar es: "+total+"\nDesea confirmar la compra?", "Finalizar compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmarVenta == JOptionPane.YES_OPTION)
+        {
+            v.finalizarVenta();
+            JOptionPane.showMessageDialog(null, "Gracias por su compra!", "Finalizar compra", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Compra cancelada!", "Finalizar compra", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 }
 
 
-/**Adquisición
+/**15/07/2022
+ * Implementación del Carrito de compras
+     * Es una lista vacía
+     * acumula el producto y la cantidad a reducir de la bodega.
+     * la cantidad se debe multiplicar por el precio
+     * codicional dependiente del pago
+ * 
+ *  * Archivo plano
+     * las lineas representan un registro/objeto
+     * campo = cada casilla representa las características
+     * la información se encuentra tabulada en filas y columnas y separada por "," o ";"
+ * 
+ * Sistemas de Base de Datos
+ *  * BDD
+     * esctructura conformada por tablas
+     * cada campo está definido por columnas con una característica particular
+ * 
+ * Características de los parámetros de las transacciones en las bases de datos método ACID
+     * A: Atomicity = capacidad de apropiarse del archivo = Si cuando una operación consiste en una serie de pasos, de los que o bien se ejecutan todos o ninguno, es decir, las transacciones son completas.
+     * C: Consistency = capacidad de verificar la veracidad de la información. asegura que sólo se empieza procesos que se pueden acabar.
+     * I: Isolation = propiedad que asegura que una operación no puede afectar a otras.
+     * D: Durability = asegura que la información no se pierda aunque falle el sistema.
+ * 
+ * Elementos para trabajr con BDD
+     * Motor de BDD = programa que permite la creación de la BDD
+         * Procesos del motor a través de Structured Query Language = SQL = lenguage para acceder y manipular BDD
+             * DDL = Data Definition Language => definiciones de datos
+             * DML = Data Manipulation Language => manipulación de datos
+             
+     * Visor de BDD = permite visualizar claramente la información en la BDD(no se hace en Java)
+     * Driver = proporciona la conexión entre el código y el motor
+ * 
+ * Funciones/elementos del software                SQL
+
+ * C reation                             Insert
+ * R etrieve                             Select
+ * U pdate                               Update
+ * D elete                               Delete
+ * 
+ * 
  * 
  */
 
