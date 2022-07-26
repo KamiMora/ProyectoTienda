@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 public class Conexion
 {
     private String conectorInstalado = "jdbc:sqlite:";
-    private String baseDatos = "\\basedatos.db";
+    private String baseDatos = "..\\Basedatos\\basedatos.db";
     private Connection conexion;  //CONEXION CON LA BD
     private Statement ejecutorSQL;   //SENTENCIAS SQL
     private ResultSet rs;
