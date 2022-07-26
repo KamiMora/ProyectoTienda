@@ -201,23 +201,6 @@ public class Presentacion
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**15/07/2022
  * Implementación del Carrito de compras
      * Es una lista vacía
@@ -254,7 +237,7 @@ public class Presentacion
  * 
  * SQL = https://www.w3schools.com/sql/default.asp
  * 
-     * Funciones/elementos del software               SQL sentences
+     * Funciones/elementos del software               SQL
     
      * C reation                                    Insert
      * R etrieve                                    Select
@@ -269,11 +252,8 @@ public class Presentacion
          * Primary Key = caracteristica única como un código(id)
          * Not NULL = no puede faltar este dato
          * 
- * 
- * 
- * 
- * 
  */
+ 
 
 
 
